@@ -1,0 +1,18 @@
+olss:
+  uuid: ${random.uuid}
+  
+management:
+  metrics:
+    tags:
+      app.name: olss-demo-app
+      app.uuid: ${olss.uuid}
+  endpoint:
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include:
+        - health
+        - info
+        - prometheus
