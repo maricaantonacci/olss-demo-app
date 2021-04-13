@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.4.0</version>
+    <version>2.4.4</version>
   </parent>
   <groupId>it.infn</groupId>
   <artifactId>olss-demo-app</artifactId>
@@ -76,7 +76,7 @@
           <execution>
             <goals>
               <goal>build-info</goal>
-                <!-- <goal>build-image</goal> -->
+              <goal>build-image</goal>
             </goals>
           </execution>
         </executions>
