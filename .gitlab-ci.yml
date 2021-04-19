@@ -12,7 +12,7 @@ build:
   image: maven:3.8.1-openjdk-11
   variables:
     MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Djava.awt.headless=true"
-    MAVEN_CLI_OPTS: "--batch-mode --errors --debug --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true ${MAVEN_JIB_OPTS}"
+    MAVEN_CLI_OPTS: "--batch-mode --errors --debug --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
   script:
     - mvn clean package
   artifacts:
@@ -27,10 +27,6 @@ docker-build:
     - docker:dind
   dependencies:
     - build
-  before_script:
-    - apk add git bash
-    - git clone https://baltig.infn.it/mw-devel/helper-scripts.git helper-scripts
-    - cp helper-scripts/scripts/* /usr/local/bin
   script:
     - docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} ${CI_REGISTRY}
     - set -e 
