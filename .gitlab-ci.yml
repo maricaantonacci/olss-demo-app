@@ -1,0 +1,44 @@
+stages:
+    - build
+    - docker-build
+    - publish-reports
+
+#variables:
+#    DOCKER_HOST: tcp://docker:2375/
+#    DOCKER_DRIVER: overlay2
+
+cache:
+  paths:
+    - .m2/repository
+
+build:
+  stage: build
+  image: maven:3.8.1-openjdk-11
+  variables:
+    MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Djava.awt.headless=true"
+    MAVEN_CLI_OPTS: "--batch-mode --errors --debug --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true ${MAVEN_JIB_OPTS}"
+  script:
+    - mvn clean package
+  artifacts:
+    paths:
+    - target/*.jar
+    expire_in: 1 week
+
+docker-build:
+  stage: docker-build
+  image: docker:latest
+  services:
+    - docker:dind
+  dependencies:
+    - build
+  before_script:
+    - apk add git bash
+    - git clone https://baltig.infn.it/mw-devel/helper-scripts.git helper-scripts
+    - cp helper-scripts/scripts/* /usr/local/bin
+  script:
+    - docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} ${CI_REGISTRY}
+    - set -e 
+    - docker build --file docker/Dockerfile -t ${CI_REGISTRY_IMAGE}/olss-demo-app:${CI_COMMIT_SHORT_SHA} .
+    - docker tag -t ${CI_REGISTRY_IMAGE}/olss-demo-app:${CI_COMMIT_REF_NAME}-latest ${CI_REGISTRY_IMAGE}/olss-demo-app:${CI_COMMIT_SHORT_SHA}
+    - docker push ${CI_REGISTRY_IMAGE}/olss-demo-app:${CI_COMMIT_SHORT_SHA}
+    - docker push ${CI_REGISTRY_IMAGE}/olss-demo-app:${CI_COMMIT_REF_NAME}-latest

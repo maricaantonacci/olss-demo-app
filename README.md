@@ -4,16 +4,17 @@
 
 ## Github actions build
 
-See [.github/workflows/maven_build.yml](here).
+See [here](.github/workflows/maven_build.yml).
 
 ## Gitlab CI build
 
-See [.gitlab-ci.yml](here).
+See [here](.gitlab-ci.yml).
 
 ## Manual build instructions
 
-The build requires Java 11 and Maven 3
+The build requires Java 11 sdk installed on your machine.
+To build, issue the following command:
 
 ```console
-mvn package
+./mvnw package
 ```
