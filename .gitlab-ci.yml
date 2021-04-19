@@ -35,6 +35,6 @@ docker-build:
     - docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} ${CI_REGISTRY}
     - set -e 
     - docker build --file docker/Dockerfile -t ${CI_REGISTRY_IMAGE}/olss-demo-app:${CI_COMMIT_SHORT_SHA} .
-    - docker tag ${CI_REGISTRY_IMAGE}/olss-demo-app:${CI_COMMIT_REF_NAME}-latest ${CI_REGISTRY_IMAGE}/olss-demo-app:${CI_COMMIT_SHORT_SHA}
+    - docker tag ${CI_REGISTRY_IMAGE}/olss-demo-app:${CI_COMMIT_SHORT_SHA} ${CI_REGISTRY_IMAGE}/olss-demo-app:${CI_COMMIT_REF_NAME}-latest
     - docker push ${CI_REGISTRY_IMAGE}/olss-demo-app:${CI_COMMIT_SHORT_SHA}
     - docker push ${CI_REGISTRY_IMAGE}/olss-demo-app:${CI_COMMIT_REF_NAME}-latest
