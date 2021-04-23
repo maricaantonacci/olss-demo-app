@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: olss-demo-app
+  namespace: olss-demo-app
+  labels:
+    app: olss-demo-app
+spec:
+  selector:
+    matchLabels:
+      app: olss-demo-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: olss-demo-app
+    spec:
+      containers:
+      - name: olss-demo-app
+        image: andreaceccanti/olss-demo-app:latest
+        resources:
+          requests:
+            cpu: "500m"
+            memory: 256m
+          limits:
+            cpu: "1"
+            memory: 1G
+        ports:
+          - containerPort: 8080

@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: olss-demo-app
+
+resources:
+  - olss-app.ns.yaml
+  - olss-app.deploy.yaml
+  - olss-app.service.yaml
+  - olss-app.ingress.yaml
+
+images:
+  - name: andreaceccanti/olss-demo-app
+    newTag: main
