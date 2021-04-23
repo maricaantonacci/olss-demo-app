@@ -20,7 +20,7 @@ spec:
         image: andreaceccanti/olss-demo-app:latest
         resources:
           requests:
-            cpu: "500m"
+            cpu: "250m"
             memory: 256m
           limits:
             cpu: "1"

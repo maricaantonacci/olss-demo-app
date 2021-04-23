@@ -1,14 +1,15 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: nginx
   name: olss-demo-app
 spec:
   rules:
     - http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: olss-demo-app
-              servicePort: 8080
+              service:
+                name: olss-demo-app
+                port:
+                 number: 8080
