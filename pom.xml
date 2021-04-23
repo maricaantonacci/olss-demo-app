@@ -16,8 +16,8 @@
 
   <properties>
     <java.version>11</java.version>
-    <gh.user>andreaceccanti</gh.user>
-    <spring-boot.build-image.imageName>docker.io/${gh.user}/${project.artifactId}-buildpack:${git.commit.id.abbrev}</spring-boot.build-image.imageName>
+    <dockerhub.user>andreaceccanti</dockerhub.user>
+    <spring-boot.build-image.imageName>docker.io/${dockerhub.user}/${project.artifactId}-buildpack:${git.commit.id.abbrev}</spring-boot.build-image.imageName>
   </properties>
 
   <dependencies>
