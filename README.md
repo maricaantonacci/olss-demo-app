@@ -51,6 +51,3 @@ Clears the memory chunks and returns the memory used by the memory hog.
 
 ### Examples
 
-
-
-
