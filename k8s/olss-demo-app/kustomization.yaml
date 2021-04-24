@@ -11,4 +11,4 @@ resources:
 
 images:
   - name: andreaceccanti/olss-demo-app
-    newTag: v0.0.3
+    newTag: v0.0.4
