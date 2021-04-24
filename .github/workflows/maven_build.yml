@@ -2,6 +2,9 @@
 name: Maven build & test
 
 on:
+  release:
+    types: [ prereleased, published ]
+
   push:
     branches: [ main ]
   pull_request:
@@ -45,6 +48,6 @@ jobs:
       with:
         context: .
         file: docker/Dockerfile
-        push: ${{ github.event_name != 'pull_request' }}
+        push: ${{ github.event_name == 'release' }}
         tags: ${{ steps.docker_meta.outputs.tags }}
         labels: ${{ steps.docker_meta.outputs.labels }}
