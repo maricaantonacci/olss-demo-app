@@ -36,6 +36,7 @@ jobs:
       with:
         images: ${{ secrets.DOCKERHUB_USERNAME }}/olss-demo-app
         tags: |
+          type=sha
           type=semver,pattern={{raw}}
           type=ref,event=branch
 
