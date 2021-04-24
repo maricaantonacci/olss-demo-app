@@ -20,11 +20,11 @@ spec:
         image: andreaceccanti/olss-demo-app:latest
         resources:
           requests:
-            cpu: "250m"
-            memory: 256m
+            cpu: 250m
+            memory: 256Mi
           limits:
             cpu: "1"
-            memory: 1G
+            memory: 256Mi
         startupProbe:
           periodSeconds: 5
           failureThreshold: 10
