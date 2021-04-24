@@ -36,6 +36,8 @@ jobs:
       with:
         images: ${{ secrets.DOCKERHUB_USERNAME }}/olss-demo-app
         tag-sha: true
+        tags: |
+          type=semver,pattern={{raw}}
 
     - name: Build & Push image
       uses: docker/build-push-action@v2
