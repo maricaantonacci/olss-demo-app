@@ -31,4 +31,9 @@ jobs:
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
     - name: Build & package native image
-      run: mvn -B -Ddocker.publishRegistry.url=https://docker.io -Ddocker.publishRegistry.username=${{secrets.DOCKERHUB_USERNAME}} -Ddocker.publishRegistry.password=${{secrets.DOCKERHUB_PASSWORD}} -Dspring-boot.build-image.publish=${{ startsWith(github.ref, 'refs/tags/') }} spring-boot:build-image
+      run: |
+        mvn -B -Ddocker.publishRegistry.url=https://docker.io \
+          -Ddocker.publishRegistry.username=${{ secrets.DOCKERHUB_USERNAME }} \
+          -Ddocker.publishRegistry.password=${{ secrets.DOCKERHUB_PASSWORD }} \
+          -Dspring-boot.build-image.publish=${{ startsWith(github.ref, 'refs/tags/') }} \ 
+          spring-boot:build-image
