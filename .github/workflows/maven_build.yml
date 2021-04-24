@@ -21,9 +21,6 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
 
-    - name: Build & Test with Maven
-      run: mvn -B package
-
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
@@ -33,25 +30,5 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-    - name: Build native image
-      run: mvn -Dspring-boot.build-image.publish=true spring-boot:build-image
-      if: ${{ startsWith(github.ref, 'refs/tags/') }}
-
-    - name: Docker meta
-      id: docker_meta
-      uses: crazy-max/ghaction-docker-meta@v2
-      with:
-        images: ${{ secrets.DOCKERHUB_USERNAME }}/olss-demo-app
-        tags: |
-          type=sha
-          type=semver,pattern={{raw}}
-          type=ref,event=branch
-
-    - name: Build & Push image
-      uses: docker/build-push-action@v2
-      with:
-        context: .
-        file: docker/Dockerfile
-        push: ${{ startsWith(github.ref, 'refs/tags/') }}
-        tags: ${{ steps.docker_meta.outputs.tags }}
-        labels: ${{ steps.docker_meta.outputs.labels }}
+    - name: Build & package native image
+      run: mvn -Dspring-boot.build-image.publish=${{ startsWith(github.ref, 'refs/tags/') }} spring-boot:build-image
