@@ -1,16 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: olss-demo-app
-  namespace: olss-demo-app
+  name: grafana
+  namespace: prometheus
 spec:
   rules:
-    - http:
+    - host: "grafana.minikube"
+      http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: olss-demo-app
+                name: prometheus-grafana
                 port:
-                 number: 8080
+                 number: 80

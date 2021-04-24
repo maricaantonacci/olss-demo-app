@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: olss-demo-app
+  namespace: olss-demo-app
+spec:
+  rules:
+    - host: "olss-demo-app.minikube"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: olss-demo-app
+                port:
+                 number: 8080

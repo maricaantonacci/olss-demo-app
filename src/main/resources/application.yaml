@@ -1,3 +1,13 @@
+server:
+  tomcat:
+    accesslog:
+      enabled: true
+      suffix: ""
+      directory: /dev
+      prefix: stdout
+      file-date-format: ""
+      buffered: false
+      
 olss:
   uuid: ${random.uuid}
   
@@ -16,3 +26,4 @@ management:
         - health
         - info
         - prometheus
+        - metrics

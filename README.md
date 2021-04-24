@@ -39,6 +39,24 @@ Returns health status information
 
 Retutns a gentle hello from the API
 
+### Application state API
+
+#### POST /api/application-state/refuse-traffic
+
+Configures application so that traffic is refused, i.e. the readiness probe
+fails.
+
+
+#### POST /api/application-state/accept-traffic
+
+Configures application so that traffic is accepted, i.e. the readiness probe
+succeeds.
+
+#### POST /api/application-state/break
+
+Configures application so that liveness probe fails, i.e. the application is
+considered broken.
+
 ### Memory Hog API
 
 #### POST /api/memory/grow

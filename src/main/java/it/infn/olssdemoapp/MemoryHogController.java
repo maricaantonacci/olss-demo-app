@@ -8,7 +8,7 @@ import io.micrometer.core.annotation.Timed;
 @RestController
 public class MemoryHogController {
 
-  public static final int TEN_MB = 10 * 1024;
+  public static final int ONE_HUNDRED_MB = 100 * 1024;
 
   private final MemoryHog memoryHog;
 
@@ -19,7 +19,7 @@ public class MemoryHogController {
   @PostMapping("/api/memory/grow")
   @Timed
   public String growMemory() {
-    memoryHog.addChunk(TEN_MB);
+    memoryHog.addChunk(ONE_HUNDRED_MB);
     return String.format("%d", memoryHog.size());
   }
 

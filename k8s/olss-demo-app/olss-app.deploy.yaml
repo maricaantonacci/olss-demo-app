@@ -25,5 +25,21 @@ spec:
           limits:
             cpu: "1"
             memory: 1G
+        startupProbe:
+          periodSeconds: 5
+          failureThreshold: 10
+          httpGet:
+            path: /actuator/health/readiness
+            port: 8080
+        readinessProbe:
+          periodSeconds: 5
+          httpGet:
+            path: /actuator/health/readiness
+            port: 8080
+        livenessProbe:
+          periodSeconds: 5
+          httpGet:
+            path: /actuator/health/liveness
+            port: 8080
         ports:
           - containerPort: 8080
