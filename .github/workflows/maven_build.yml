@@ -34,9 +34,5 @@ jobs:
       env:
         DH_USER: ${{ secrets.DOCKERHUB_USERNAME }}
         DH_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-      run: |
-        mvn -B -Ddocker.publishRegistry.url=https://docker.io \
-          -Ddocker.publishRegistry.username=$DH_USER \
-          -Ddocker.publishRegistry.password=$DH_PASSWORD \
-          -Dspring-boot.build-image.publish=${{ startsWith(github.ref, 'refs/tags/') }} \ 
-          spring-boot:build-image
+        DH_PUBLISH: ${{ startsWith(github.ref, 'refs/tags/') }}
+      run: mvn -Ddocker.publishRegistry.url=https://docker.io -Ddocker.publishRegistry.username=$DH_USER -Ddocker.publishRegistry.password=$DH_PASSWORD -Dspring-boot.build-image.publish=$DH_PUBLISH spring-boot:build-image
