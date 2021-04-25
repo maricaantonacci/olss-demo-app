@@ -2,7 +2,10 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: olss-demo-app
+  namespace: monitoring
 spec:
+  targetLabels:
+    - olss-demo-app
   selector:
     matchLabels:
       app: olss-demo-app
@@ -10,6 +13,5 @@ spec:
     matchNames:
       - olss-demo-app
   endpoints:
-  - port: http
-    scheme: http
+  - port: web
     path: /actuator/prometheus

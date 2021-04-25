@@ -7,8 +7,8 @@ resources:
   - olss-app.ns.yaml
   - olss-app.deploy.yaml
   - olss-app.service.yaml
-  - olss-app.ingress.yaml
+    # - olss-app.ingress.yaml
 
 images:
   - name: andreaceccanti/olss-demo-app
-    newTag: v0.0.3
+    newTag: v0.0.4
