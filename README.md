@@ -8,9 +8,17 @@ The build requires Java 11 sdk installed on your machine.
 To build, issue the following command:
 
 ```console
-./mvnw package
+$ ./mvnw package
 ```
 
+## Manual docker build instructions
+
+A docker image for the app can be built using the following commands:
+
+```console
+$ ./mvnw package
+$ docker build --file docker/Dockerfile -t olss-demo-app .
+```
 ## Github actions build
 
 See [here](.github/workflows/maven_build.yml).
@@ -66,6 +74,3 @@ Allocates a 10M heap chunk and returns the memory used by the memory hog.
 #### POST /api/memory/clear
 
 Clears the memory chunks and returns the memory used by the memory hog.
-
-### Examples
-
